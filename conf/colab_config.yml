@@ -1,0 +1,16 @@
+$include:
+  - conf/base.yml
+  - conf/1gpu.yml
+
+
+train/build_dataset.folders:
+  my_data:
+    - /content/descript-audio-codec/data/train
+
+val/build_dataset.folders:
+  my_data:
+    - /content/descript-audio-codec/data/val
+
+test/build_dataset.folders:
+  my_data:
+    - /content/descript-audio-codec/data/test
