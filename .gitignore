@@ -131,7 +131,7 @@ dmypy.json
 output/
 snapshot/
 *.m4a
-*.wav
+# *.wav
 notebooks/scratch.ipynb
 notebooks/inspect.ipynb
 notebooks/effects.ipynb
