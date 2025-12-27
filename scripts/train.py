@@ -90,8 +90,10 @@ def build_dataset(
     # cycles through them.
     datasets = []
     for _, v in folders.items():
-        loader = AudioLoader(sources=v)
-        transform = build_transform()
+        loader = AudioLoader(sources=v) # sources could be folders or CSV files which contains paths to audio files
+        transform = build_transform() # transform is a composition of preprocess, augment, and postprocess transforms
+        # preprocess: identity transform, augment: identity transform, postprocess: volume normalization, rescale audio, shift phase
+        
         dataset = AudioDataset(loader, sample_rate, transform=transform)
         datasets.append(dataset)
 
@@ -143,6 +145,11 @@ def load(
         tracker.print(f"Resuming from {str(Path('.').absolute())}/{kwargs['folder']}")
         if (Path(kwargs["folder"]) / "dac").exists():
             generator, g_extra = DAC.load_from_folder(**kwargs)
+            # genrator load model(package.pth or weights.pth)from dac folder
+            # g_extra is a dictionary of extra data
+            # g_extra["metadata.pth"], g_extra["tracker.pth"], 
+            # g_extra["optimizer.pth"], g_extra["scheduler.pth"] 
+
         if (Path(kwargs["folder"]) / "discriminator").exists():
             discriminator, d_extra = Discriminator.load_from_folder(**kwargs)
 

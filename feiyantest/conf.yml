@@ -1,0 +1,8 @@
+#ToyModel.dim: 256
+#ToyModel.lr: 0.5
+
+encoder/ToyModel.dim: 512
+encoder/ToyModel.lr: 1.1
+
+decoder/ToyModel.dim: 1024
+decoder/ToyModel.lr: 1.2

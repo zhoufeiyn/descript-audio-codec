@@ -2,6 +2,22 @@ $include:
   - conf/base.yml
   - conf/1gpu.yml
 
+batch_size: 12
+val_batch_size: 12
+
+num_iters: 20000
+save_iters: [5000, 10000, 15000, 20000]
+valid_freq: 5000
+sample_freq: 5000
+val_idx: [0,1,2,3,4,5,6,7]
+
+# 过拟合测试配置：使用较长的 duration 来覆盖完整音频
+# 8秒音频，使用 7 秒 duration 可以几乎覆盖完整音频
+train/AudioDataset.duration: 7
+train/AudioDataset.n_examples: 100  # 数据集大小，会从同一条音频采样不同片段
+
+val/AudioDataset.duration: 7
+val/AudioDataset.n_examples: 100    # 验证集也使用同一条音频
 
 train/build_dataset.folders:
   my_data:
@@ -9,7 +25,7 @@ train/build_dataset.folders:
 
 val/build_dataset.folders:
   my_data:
-    - /content/descript-audio-codec/data/val
+    - /content/descript-audio-codec/data/train  # 使用同一个文件夹，确保是同一音频
 
 test/build_dataset.folders:
   my_data:
